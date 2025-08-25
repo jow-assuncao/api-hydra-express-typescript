@@ -21,7 +21,7 @@ model List {
   description String
 
   createdAt DateTime   @default(now())
-  updatedAt DateTime
+  updatedAt DateTime   @updatedAt
   ListItem  ListItem[]
 }
 
@@ -35,4 +35,7 @@ model ListItem {
 
   listId String
   list   List   @relation(fields: [listId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -4,11 +4,11 @@ import { prisma } from "@/shared/infra/prisma/client";
 export async function bootstrap() {
   try {
     await prisma.$connect();
-    console.log("Supase DB connection estabilished");
+    console.log("Supabase DB connection estabilished");
 
     await startHttpServer();
   } catch (err) {
-    console.error("Error on connecting with Supase DB");
+    console.error("Error on connecting with Supabase DB");
     process.exit(1);
   }
 }
