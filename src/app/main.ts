@@ -1,12 +1,14 @@
 import { startHttpServer } from "@/app/http";
 import { prisma } from "@/shared/infra/prisma/client";
+import { startWsServer } from "./ws";
 
 export async function bootstrap() {
   try {
     await prisma.$connect();
     console.log("Supabase DB connection estabilished");
 
-    await startHttpServer();
+    const { server } = await startHttpServer();
+    startWsServer(server);
   } catch (err) {
     console.error("Error on connecting with Supabase DB");
     process.exit(1);

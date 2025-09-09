@@ -1,5 +1,6 @@
 import { env } from "@/config/env";
 import express from "express";
+import http from "http";
 import cors from "cors";
 
 import { listRoutes } from "@/modules/list/routes";
@@ -13,11 +14,14 @@ export async function startHttpServer() {
   app.use("/list", listRoutes);
   app.use("/list-item", listItemRoutes);
 
+  const server = http.createServer(app);
   const PORT = env.PORT || 3000;
 
-  app.listen(PORT, () => {
+  server.listen(PORT, () => {
     console.log(
       `Hydra server is running... Port: ${PORT}/Environment: ${env.NODE_ENV}`
     );
   });
+
+  return { app, server };
 }
